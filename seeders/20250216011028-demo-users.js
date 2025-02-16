@@ -9,18 +9,20 @@ module.exports = {
 
       const users = [
         {
-          nombre: "Admin",
-          apellido: "User",
+          name: "Admin User",
           email: "admin@example.com",
+          phone: "1234567890",
+          user: "adminuser",
           password: hashedPassword,
           rol: "admin",
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          nombre: "Normal",
-          apellido: "User",
+          name: "Normal User",
           email: "user@example.com",
+          phone: "0987654321",
+          user: "normaluser",
           password: hashedPassword,
           rol: "user",
           createdAt: new Date(),
