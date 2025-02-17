@@ -1,10 +1,15 @@
-// filepath: /c:/Users/julia/Desktop/EstateAgency/routes/propertyRoutes.js
 const express = require('express');
+const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
 const router = express.Router();
 const propertyController = require('../controllers/propertyController');
 
+router.get('/', propertyController.renderIndexPage);
 router.get('/properties', propertyController.getProperties);
 router.get('/property/:id', propertyController.getProperty);
-router.get('/', propertyController.renderIndexPage);
+
+// Ruta protegida para el panel de administración
+router.get('/admin', ensureAdmin, (req, res) => {
+  res.render('admin', { user: req.user });
+});
 
 module.exports = router;
