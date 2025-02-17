@@ -20,8 +20,22 @@ const renderIndexPage = async (req, res) => {
   }
 };
 
+const getProperty = async (req, res) => {
+  try {
+    const property = await Property.findByPk(req.params.id);
+    if (property) {
+      res.render('property-single', { property });
+    } else {
+      res.status(404).send('Property not found');
+    }
+  } catch (err) {
+    console.error('Error fetching property:', err);
+    res.status(500).send('Error fetching property');
+  }
+};
+
 module.exports = {
     getProperties,
     renderIndexPage,
-    
+    getProperty,
 };

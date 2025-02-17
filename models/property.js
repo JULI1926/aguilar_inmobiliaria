@@ -48,6 +48,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM('active', 'inactive'),
         defaultValue: 'active'
       },
+      property_type: {
+        type: DataTypes.ENUM(
+          'Local', 'Apartamento', 'Casa', 'Terreno', 'Finca', 'Oficina', 
+          'Casa de campo', 'Bodega', 'Casa en conjunto cerrado', 
+          'Casa en condominio', 'Penthouse', 'Nave industrial'
+        ),
+        allowNull: false,
+        defaultValue: 'Casa'
+      },
       ownerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -55,7 +64,11 @@ module.exports = (sequelize, DataTypes) => {
           model: 'Owners',
           key: 'id'
         }
-      }
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false
+      },
     });
   
     return Property;

@@ -1,9 +1,9 @@
+// filepath: [server.js](http://_vscodecontentref_/8)
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-//const { Property } = require('./models');
-const propertyController = require('./controllers/propertyController');
+const propertyRoutes = require('./routes/propertyRoutes');
 
 const app = express();
 const port = 3000;
@@ -18,12 +18,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta para la página principal
-// Ruta para la página principal
-app.get('/', propertyController.renderIndexPage);
-
-// Ruta para obtener todas las propiedades
-app.get('/properties', propertyController.getProperties);
+// Usar las rutas definidas en propertyRoutes
+app.use('/', propertyRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
