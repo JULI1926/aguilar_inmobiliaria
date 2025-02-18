@@ -3,11 +3,11 @@ const passport = require('../config/passport');
 const router = express.Router();
 
 router.get('/login', (req, res) => {
-  res.render('login', { message: req.flash('error') });
+  res.render('admin/login', { message: req.flash('error') });
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/admin',
+  successRedirect: '/admin/dashboard',
   failureRedirect: '/auth/login',
   failureFlash: true
 }));

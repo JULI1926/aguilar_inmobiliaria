@@ -7,11 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       saleRent: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-      link: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
+      },      
       address: {
         type: DataTypes.STRING,
         allowNull: false

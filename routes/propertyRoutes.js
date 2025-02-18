@@ -1,15 +1,19 @@
 const express = require('express');
-const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
 const router = express.Router();
 const propertyController = require('../controllers/propertyController');
+
+// // Ruta para crear una propiedad
+// router.get('/property/create', ensureAdmin, (req, res) => {
+//   res.render('admin/create-property');
+// });
+// router.post('/property/create', ensureAdmin, upload.single('img'), propertyController.createProperty);
+
 
 router.get('/', propertyController.renderIndexPage);
 router.get('/properties', propertyController.getProperties);
 router.get('/property/:id', propertyController.getProperty);
 
-// Ruta protegida para el panel de administración
-router.get('/admin', ensureAdmin, (req, res) => {
-  res.render('admin', { user: req.user });
-});
+// Ruta para actualizar una propiedad
+router.put('/property/:id', propertyController.updateProperty);
 
 module.exports = router;

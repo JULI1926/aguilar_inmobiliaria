@@ -6,7 +6,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('./config/passport');
 const flash = require('connect-flash');
+
+
 const propertyRoutes = require('./routes/propertyRoutes');
+const adminRouter = require('./routes/admin');
 const authRoutes = require('./routes/authRoutes');
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(64).toString('hex');
@@ -39,9 +42,14 @@ app.set('views', path.join(__dirname, 'views'));
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Servir archivos estáticos específicos para la ruta '/admin'
+app.use('/admin', express.static(path.join(__dirname, 'public/admin')));
+
 // Usar las rutas definidas en propertyRoutes
+
 app.use('/', propertyRoutes);
 app.use('/auth', authRoutes); // Usar las rutas de autenticación
+app.use('/admin', adminRouter);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

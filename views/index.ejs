@@ -88,15 +88,21 @@
               <div class="filters">
                 <select id="department-filter" class="form-select">
                   <option value="">Departamento</option>
-                  <!-- Agrega opciones de departamento aquí -->
+                  <% departments.forEach(department => { %>
+                    <option value="<%= department %>"><%= department %></option>
+                  <% }) %>
                 </select>
                 <select id="city-filter" class="form-select">
                   <option value="">Ciudad</option>
-                  <!-- Agrega opciones de ciudad aquí -->
+                  <% cities.forEach(city => { %>
+                    <option value="<%= city %>"><%= city %></option>
+                  <% }) %>
                 </select>
                 <select id="neighborhood-filter" class="form-select">
                   <option value="">Barrio</option>
-                  <!-- Agrega opciones de barrio aquí -->
+                  <% neighborhoods.forEach(neighborhood => { %>
+                    <option value="<%= neighborhood %>"><%= neighborhood %></option>
+                  <% }) %>
                 </select>
                 <button id="reset-button" class="btn btn-secondary">Reiniciar</button>
               </div>
@@ -199,7 +205,6 @@
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
-
       <!-- Page Title -->
       <div class="page-title" data-aos="fade">
         <div class="heading">
