@@ -16,4 +16,7 @@ router.get('/property/:id', propertyController.getProperty);
 // Ruta para actualizar una propiedad
 router.put('/property/:id', propertyController.updateProperty);
 
+// Ruta para obtener propiedades filtradas
+router.get('/filter', propertyController.filterProperties);
+
 module.exports = router;

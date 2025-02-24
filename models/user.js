@@ -39,5 +39,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  User.prototype.validPassword = function (password) {
+    // Implementa la lógica para validar la contraseña
+    return this.password === password;
+  };
+
   return User;
 };

@@ -25,7 +25,10 @@ app.use(bodyParser.json());
 app.use(session({
   secret: secretKey,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // 24 horas (en milisegundos)
+  }
 }));
 
 // Inicializar passport
