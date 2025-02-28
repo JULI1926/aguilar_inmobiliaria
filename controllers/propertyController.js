@@ -65,8 +65,9 @@ const renderIndexPage = async (req, res) => {
 const getProperty = async (req, res) => {
   try {
     const property = await Property.findByPk(req.params.id);
+    const baseUrl = '/';
     if (property) {
-      res.render('property-single', { property });
+      res.render('property-single', { property, baseUrl });
     } else {
       res.status(404).send('Property not found');
     }

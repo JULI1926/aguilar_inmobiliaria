@@ -19,4 +19,12 @@ router.put('/property/:id', propertyController.updateProperty);
 // Ruta para obtener propiedades filtradas
 router.get('/filter', propertyController.filterProperties);
 
+router.get('/about', (req, res) => {
+    res.render('about');
+});
+
+router.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 module.exports = router;
