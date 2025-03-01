@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Property = sequelize.define('Property', {
-      img: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
+    const Property = sequelize.define('Property', {      
       saleRent: {
         type: DataTypes.STRING,
         allowNull: false

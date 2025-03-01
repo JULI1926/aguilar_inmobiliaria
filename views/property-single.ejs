@@ -94,8 +94,10 @@
         <div class="col-lg-7">
           <div class="img-property-slide-wrap">
             <div class="img-property-slide">
-              <% if (property && property.img) { %>
-                <img src="<%= baseUrl + property.img %>" alt="Image" class="img-fluid">
+              <% if (property && property.PropertyImages && property.PropertyImages.length > 0) { %>
+                <% property.PropertyImages.forEach(image => { %>
+                  <img src="<%= baseUrl + image.img %>" alt="Image" class="img-fluid">
+                <% }) %>
               <% } else { %>
                 <p>No images available</p>
               <% } %>

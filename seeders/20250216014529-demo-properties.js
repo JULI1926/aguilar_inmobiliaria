@@ -4,9 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Properties', [
       {
-        img: "assets/img/properties/property-1.jpg",
-        saleRent: "Arrendo | $700000",
-        link: "property-single.html",
+        saleRent: "Arrendo | $700000",       
         address: "Carrera 47",
         area: "340m2",
         rooms: 5,
@@ -16,14 +14,13 @@ module.exports = {
         city: "Ciudad 1",
         neighborhood: "Barrio 1",
         status: "active",
-        ownerId: 1, // ID del propietario
+        ownerId: 1,
+        description: "Hermosa propiedad ubicada en una zona tranquila, con amplios espacios y excelente iluminación natural.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        img: "assets/img/properties/property-2.jpg",
-        saleRent: "Venta | $350.000.000",
-        link: "property-single.html",
+        saleRent: "Venta | $350.000.000",        
         address: "Carrera 77",
         area: "340m2",
         rooms: 5,
@@ -33,14 +30,13 @@ module.exports = {
         city: "Ciudad 2",
         neighborhood: "Barrio 2",
         status: "active",
-        ownerId: 2, // ID del propietario
+        ownerId: 2,
+        description: "Propiedad en venta con acabados de lujo, ideal para familias grandes, ubicada cerca de parques y centros comerciales.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        img: "assets/img/properties/property-3.jpg",
-        saleRent: "Venta | $580.000",
-        link: "property-single.html",
+        saleRent: "Venta | $580.000",        
         address: "Carrera 81",
         area: "340m2",
         rooms: 5,
@@ -50,14 +46,13 @@ module.exports = {
         city: "Ciudad 3",
         neighborhood: "Barrio 3",
         status: "active",
-        ownerId: 3, // ID del propietario
+        ownerId: 3,
+        description: "Espaciosa propiedad en venta, con jardín privado y excelente distribución de espacios.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        img: "assets/img/properties/property-4.jpg",
-        saleRent: "Arrendo | $650.000",
-        link: "property-single.html",
+        saleRent: "Arrendo | $650.000",        
         address: "Carrera 92",
         area: "340m2",
         rooms: 5,
@@ -67,14 +62,13 @@ module.exports = {
         city: "Ciudad 4",
         neighborhood: "Barrio 4",
         status: "active",
-        ownerId: 4, // ID del propietario
+        ownerId: 4,
+        description: "Propiedad en arriendo, ideal para oficinas o negocios, ubicada en una zona de alto tráfico.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        img: "assets/img/properties/property-5.jpg",
-        saleRent: "Venta | $300.000.000",
-        link: "property-single.html",
+        saleRent: "Venta | $300.000.000",        
         address: "Carrera 34",
         area: "340m2",
         rooms: 5,
@@ -84,14 +78,13 @@ module.exports = {
         city: "Ciudad 5",
         neighborhood: "Barrio 5",
         status: "active",
-        ownerId: 1, // ID del propietario
+        ownerId: 1,
+        description: "Propiedad en venta con excelente ubicación, cerca de colegios y transporte público.",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        img: "assets/img/properties/property-6.jpg",
-        saleRent: "Venta | $650.000.000",
-        link: "property-single.html",
+        saleRent: "Venta | $650.000.000",        
         address: "Carrera 65",
         area: "340m2",
         rooms: 5,
@@ -101,14 +94,30 @@ module.exports = {
         city: "Ciudad 6",
         neighborhood: "Barrio 6",
         status: "active",
-        ownerId: 2, // ID del propietario
+        ownerId: 2,
+        description: "Propiedad de lujo en venta, con piscina y amplias áreas sociales, ideal para el entretenimiento.",
         createdAt: new Date(),
         updatedAt: new Date()
       }
     ], {});
+
+    const properties = await queryInterface.sequelize.query(
+      `SELECT id FROM Properties`,
+      { type: Sequelize.QueryTypes.SELECT }
+    );
+
+    const propertyImages = properties.map((property, index) => ({
+      propertyId: property.id,
+      img: `assets/img/properties/property-${index + 1}.jpg`,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
+
+    await queryInterface.bulkInsert('PropertyImages', propertyImages, {});
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('PropertyImages', null, {});
     await queryInterface.bulkDelete('Properties', null, {});
   }
 };

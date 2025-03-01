@@ -45,6 +45,9 @@ app.set('views', path.join(__dirname, 'views'));
 // Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Servir archivos estáticos desde la carpeta 'assets'
+app.use(express.static(path.join(__dirname, 'assets')));
+
 // Servir archivos estáticos específicos para la ruta '/admin'
 app.use('/admin', express.static(path.join(__dirname, 'public/admin')));
 

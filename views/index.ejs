@@ -94,17 +94,24 @@
 			<div class="row justify-content-center align-items-center">
 			  <div class="col-lg-9 text-center">
 				<h1 class="heading" data-aos="fade-up">La Forma Mas Fácil de Encontrar la Casa de Tus Sueños </h1>
-				<form action="/filter" method="get" class="narrow-w form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+				<form action="/filter" method="get" class="narrow-w form-search d-flex align-items-stretch mb-3"
+				  data-aos="fade-up" data-aos-delay="200">
 				  <select id="search-select" name="search" class="form-control px-4">
 					<option value="" disabled selected>Buscar por barrio, ciudad o departamento</option>
 					<% neighborhoods.forEach(neighborhood => { %>
-					  <option value="<%= neighborhood.name %>"><%= neighborhood.name %>, <%= neighborhood.city %>, <%= neighborhood.department %> (<%= neighborhood.count %>)</option>
+					<option value="<%= neighborhood.neighborhood %>">
+					  <%= neighborhood.neighborhood %>, <%= neighborhood.city %>, <%= neighborhood.department %> (<%= neighborhood.count %>)
+					</option>
 					<% }) %>
 					<% cities.forEach(city => { %>
-					  <option value="<%= city.name %>"><%= city.name %>, <%= city.department %> (<%= city.count %>)</option>
+					<option value="<%= city.city %>">
+					  <%= city.city %>, <%= city.department %> (<%= city.count %>)
+					</option>
 					<% }) %>
 					<% departments.forEach(department => { %>
-					  <option value="<%= department.name %>"><%= department.name %> (<%= department.count %>)</option>
+					<option value="<%= department.department %>">
+					  <%= department.department %> (<%= department.count %>)
+					</option>
 					<% }) %>
 					<option value="all">Ver todas las propiedades</option>
 				  </select>
@@ -112,7 +119,7 @@
 				</form>
 			  </div>
 			</div>
-		</div>
+		  </div>
 	</div>
 
 
@@ -132,7 +139,8 @@
 					<div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="<%= (index + 1) * 100 %>">
 						<div class="property-item">
 							<a href="property-single.html" class="img">
-								<img src="<%= property.img %>" alt="Image" class="img-fluid">
+								<img src="<%= property.images.length > 0 ? property.images[0].img : '/path/to/default/image.jpg' %>"
+									alt="Image" class="img-fluid">
 							</a>
 							<div class="property-content">
 								<div class="price mb-2"><span>
@@ -165,7 +173,8 @@
 											</span>
 										</span>
 									</div>
-									<a href="/property/<%= property.id %>" class="btn btn-primary py-2 px-3">Ver Detalles</a>
+									<a href="/property/<%= property.id %>" class="btn btn-primary py-2 px-3">Ver
+										Detalles</a>
 								</div>
 							</div>
 						</div>
@@ -598,13 +607,13 @@
 		});
 	</script>
 	<script>
-		$(document).ready(function() {
-		  $('#search-select').select2({
-			placeholder: 'Buscar por barrio, ciudad o departamento',
-			allowClear: true
-		  });
+		$(document).ready(function () {
+			$('#search-select').select2({
+				placeholder: 'Buscar por barrio, ciudad o departamento',
+				allowClear: true
+			});
 		});
-	  </script>
+	</script>
 
 </body>
 
