@@ -73,7 +73,7 @@
   <div class="hero page-inner overlay" style="background-image: url('<%= baseUrl + property.img %>');">
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-lg-9 text-center mt-5">
+        <div class="col-lg-9 text-center mt-0">
           <h1 class="heading" data-aos="fade-up"><%= property.address %></h1>
 
           <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
@@ -94,8 +94,8 @@
         <div class="col-lg-7">
           <div class="img-property-slide-wrap">
             <div class="img-property-slide">
-              <% if (property && property.PropertyImages && property.PropertyImages.length > 0) { %>
-                <% property.PropertyImages.forEach(image => { %>
+              <% if (property && property.images && property.images.length > 0) { %>
+                <% property.images.slice(1).forEach(image => { %>
                   <img src="<%= baseUrl + image.img %>" alt="Image" class="img-fluid">
                 <% }) %>
               <% } else { %>
@@ -124,7 +124,7 @@
             </span>
           </div>
           
-          <div class="d-block agent-box p-5">
+          <!-- <div class="d-block agent-box p-5">
             <div class="img mb-4">
               <img src="/assets/images/person_2-min.jpg" alt="Image" class="img-fluid">
             </div>
@@ -139,7 +139,7 @@
                 <li class="me-1"><a href="#"><span class="icon-linkedin"></span></a></li>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

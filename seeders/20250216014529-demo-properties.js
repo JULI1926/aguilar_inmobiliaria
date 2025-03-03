@@ -106,12 +106,26 @@ module.exports = {
       { type: Sequelize.QueryTypes.SELECT }
     );
 
-    const propertyImages = properties.map((property, index) => ({
-      propertyId: property.id,
-      img: `assets/img/properties/property-${index + 1}.jpg`,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }));
+    const propertyImages = properties.flatMap((property, index) => [
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-1.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-2.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-3.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ]);
 
     await queryInterface.bulkInsert('PropertyImages', propertyImages, {});
   },

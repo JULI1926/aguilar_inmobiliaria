@@ -488,7 +488,9 @@ progress {
 
 .img-fluid {
   max-width: 100%;
-  height: auto; }
+  height: auto; 
+  object-fit: cover;
+}
 
 .img-thumbnail {
   padding: 0.25rem;
@@ -9683,7 +9685,7 @@ textarea {
     height: 50vh;
     min-height: 600px; }
   .hero.page-inner, .hero.page-inner > .container > .row {
-    height: 70vh;
+    height: 40vh;
     min-height: 300px; }
   .hero > .container {
     position: relative;
@@ -9845,26 +9847,36 @@ textarea {
       background-color: #fff;
       width: 35px; }
 
-.property-slider-wrap, .img-property-slide-wrap {
-  position: relative; }
-  .property-slider-wrap .tns-outer .tns-inner, .img-property-slide-wrap .tns-outer .tns-inner {
-    padding-bottom: 100px !important; }
-  .property-slider-wrap .tns-nav, .img-property-slide-wrap .tns-nav {
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    bottom: 40px;
-    z-index: 2; }
-    .property-slider-wrap .tns-nav button, .img-property-slide-wrap .tns-nav button {
-      background: none;
-      border: none;
-      display: inline-block;
-      margin: 2px;
-      position: relative; }
+      .property-slider-wrap, .img-property-slide-wrap {
+        position: relative;
+      }
+      
+      .property-slider-wrap .tns-outer .tns-inner, .img-property-slide-wrap .tns-outer .tns-inner {
+        padding-bottom: 100px !important;
+      }
+      
+      .property-slider-wrap .tns-nav, .img-property-slide-wrap .tns-nav {
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        bottom: 40px;
+        z-index: 2;
+      }
+      
+      .property-slider-wrap .tns-nav button, .img-property-slide-wrap .tns-nav button {
+        background: none;
+        border: none;
+        display: inline-block;
+        margin: 2px;
+        position: relative;
+      }
+      
       .property-slider-wrap .tns-nav button:active, .property-slider-wrap .tns-nav button:focus, .img-property-slide-wrap .tns-nav button:active, .img-property-slide-wrap .tns-nav button:focus {
-        outline: none; }
+        outline: none;
+      }
+      
       .property-slider-wrap .tns-nav button:before, .img-property-slide-wrap .tns-nav button:before {
         position: absolute;
         content: "";
@@ -9875,9 +9887,25 @@ textarea {
         right: 0;
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
-        transition: .3s all ease; }
+        transition: .3s all ease;
+      }
+      
       .property-slider-wrap .tns-nav button.tns-nav-active:before, .img-property-slide-wrap .tns-nav button.tns-nav-active:before {
-        background-color: #00204a; }
+        background-color: #00204a;
+      }
+
+      /* Add these styles to ensure images fit the container */
+.img-property-slide {
+  width: 100%;
+  height: 550px; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.img-property-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Or use 'contain' if you prefer */
+}
 
 .gradient-text {
   font-weight: 700;

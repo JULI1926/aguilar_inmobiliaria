@@ -8,7 +8,7 @@ const getProperties = async (req, res) => {
     const properties = await Property.findAll({
       include: [{
         model: PropertyImage,
-        as: 'PropertyImages'
+        as: 'images' // Cambia 'PropertyImages' a 'images'
       }]
     });
 
@@ -26,21 +26,11 @@ const getProperties = async (req, res) => {
       group: ['neighborhood', 'city', 'department']
     });
 
-    // Mapear propiedades para incluir solo la primera URL de imagen
-    const propertiesWithImages = properties.map(property => {
-      const image = property.PropertyImages.length > 0 ? `/img/properties/${property.PropertyImages[0].img}` : null;
-      console.log(`Property ID: ${property.id}, Image URL: ${image}`);
-      return {
-        ...property.dataValues,
-        image
-      };
-    });
-
     res.render('index', {
-      properties: propertiesWithImages,
-      departments: departments.map(d => ({ name: d.department, count: d.dataValues.count })),
-      cities: cities.map(c => ({ name: c.city, department: c.department, count: c.dataValues.count })),
-      neighborhoods: neighborhoods.map(n => ({ name: n.neighborhood, city: n.city, department: n.department, count: n.dataValues.count }))
+      properties,
+      departments: departments.map(d => ({ department: d.department, count: d.dataValues.count })),
+      cities: cities.map(c => ({ city: c.city, department: c.department, count: c.dataValues.count })),
+      neighborhoods: neighborhoods.map(n => ({ neighborhood: n.neighborhood, city: n.city, department: n.department, count: n.dataValues.count }))
     });
   } catch (error) {
     console.error(error);
@@ -73,7 +63,12 @@ const renderIndexPage = async (req, res) => {
       group: ['neighborhood', 'city', 'department']
     });
 
-    res.render('index', { properties, departments, cities, neighborhoods });
+    res.render('index', {
+      properties,
+      departments: departments.map(d => ({ department: d.department, count: d.dataValues.count })),
+      cities: cities.map(c => ({ city: c.city, department: c.department, count: c.dataValues.count })),
+      neighborhoods: neighborhoods.map(n => ({ neighborhood: n.neighborhood, city: n.city, department: n.department, count: n.dataValues.count }))
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -82,7 +77,13 @@ const renderIndexPage = async (req, res) => {
 
 const getProperty = async (req, res) => {
   try {
-    const property = await Property.findByPk(req.params.id);
+    const property = await Property.findByPk(req.params.id, {
+      include: [{
+        model: PropertyImage,
+        as: 'images',
+        attributes: ['img']
+      }]
+    });
     const baseUrl = '/';
     if (property) {
       res.render('property-single', { property, baseUrl });
@@ -92,6 +93,17 @@ const getProperty = async (req, res) => {
   } catch (err) {
     console.error('Error fetching property:', err);
     res.status(500).send('Error fetching property');
+  }
+};
+
+const listProperties = async (req, res) => {
+  try {
+    const properties = await Property.findAll({ where: { status: 'active' }, raw: true });   
+
+    res.render('admin/list-properties', { properties });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
   }
 };
 
@@ -141,7 +153,14 @@ const filterProperties = async (req, res) => {
       };
     }
 
-    const properties = await Property.findAll({ where });
+    const properties = await Property.findAll({
+      where,
+      include: [{
+        model: PropertyImage,
+        as: 'images', // Cambia 'PropertyImages' a 'images'
+        attributes: ['img']
+      }]
+    });
 
     // Obtener valores únicos de department, city y neighborhood
     const departments = await Property.findAll({
@@ -159,21 +178,10 @@ const filterProperties = async (req, res) => {
 
     res.render('index', {
       properties,
-      departments: departments.map(d => ({ name: d.department, count: d.dataValues.count })),
-      cities: cities.map(c => ({ name: c.city, department: c.department, count: c.dataValues.count })),
-      neighborhoods: neighborhoods.map(n => ({ name: n.neighborhood, city: n.city, department: n.department, count: n.dataValues.count }))
+      departments: departments.map(d => ({ department: d.department, count: d.dataValues.count })),
+      cities: cities.map(c => ({ city: c.city, department: c.department, count: c.dataValues.count })),
+      neighborhoods: neighborhoods.map(n => ({ neighborhood: n.neighborhood, city: n.city, department: n.department, count: n.dataValues.count }))
     });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-};
-
-const listProperties = async (req, res) => {
-  try {
-    const properties = await Property.findAll({ where: { status: 'active' }, raw: true });   
-
-    res.render('admin/list-properties', { properties });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
