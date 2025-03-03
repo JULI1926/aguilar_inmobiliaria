@@ -37,12 +37,14 @@
                     <div class="card-body">
                       <form action="/admin/create-property" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                          <label for="img">Imagen</label>
-                          <div class="custom-file">                            
-                            <input type="file" class="custom-file-input" id="img" name="img" required>
-                            <label class="custom-file-label" for="img">Choose file</label>
+                          <label for="img">Imágenes</label>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="img" name="img" multiple required>
+                            <label class="custom-file-label" for="img">Selecciona archivos</label>
                           </div>
+                          <small class="form-text text-muted">Puedes subir múltiples imágenes para la propiedad.</small>
                         </div>
+                        <div id="image-preview" class="mt-3"></div>
                         <div class="form-group">
                           <label for="saleRent">Sale/Rent</label>
                           <input type="text" class="form-control" id="saleRent" name="saleRent" required>
@@ -134,6 +136,9 @@
         </a>
 
         <%- include('partials/scripts') %>
+        <script src="/admin/js/list-properties.js"></script>
+
+        
 
 </body>
 

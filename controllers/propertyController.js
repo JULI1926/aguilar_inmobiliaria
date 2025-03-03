@@ -2,6 +2,7 @@ const { Property, PropertyImage } = require('../models');
 const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 
 const getProperties = async (req, res) => {
   try {
@@ -107,6 +108,7 @@ const listProperties = async (req, res) => {
   }
 };
 
+
 const createProperty = async (req, res) => {
   try {
     const { saleRent, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
@@ -114,29 +116,30 @@ const createProperty = async (req, res) => {
       saleRent, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
     });
 
-    if (req.files && req.files.img) {
-      let images = req.files.img;
+    if (req.files && req.files.length > 0) {
       const imagePaths = [];
 
-      if (!Array.isArray(images)) {
-        images = [images];
-      }
+      req.files.forEach((file, index) => {
+        const newFileName = `property-${property.id}-${index + 1}${path.extname(file.originalname)}`;
+        const newPath = path.join(__dirname, '../public/assets/img/properties', newFileName);
 
-      images.forEach((image) => {
-        const imagePath = `assets/img/properties/${image.name}`;
-        image.mv(path.join(__dirname, '..', 'public', imagePath));
-        imagePaths.push(imagePath);
+        // Mover el archivo a la nueva ubicación con el nuevo nombre
+        fs.renameSync(file.path, newPath);
+
+        // Guardar la ruta relativa en la base de datos
+        imagePaths.push(`assets/img/properties/${newFileName}`);
       });
 
       await Promise.all(imagePaths.map(img => PropertyImage.create({ propertyId: property.id, img })));
     }
 
-    res.redirect('/admin/properties');
+    res.redirect('/');
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
 };
+
 
 const filterProperties = async (req, res) => {
   try {
