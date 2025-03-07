@@ -1,30 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const propertyController = require('../controllers/propertyController');
-
-// // Ruta para crear una propiedad
-// router.get('/property/create', ensureAdmin, (req, res) => {
-//   res.render('admin/create-property');
-// });
-// router.post('/property/create', ensureAdmin, upload.single('img'), propertyController.createProperty);
+const multer = require('multer');
+const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
 
 
-router.get('/', propertyController.renderIndexPage);
-router.get('/properties', propertyController.getProperties);
-router.get('/property/:id', propertyController.getProperty);
-
-// Ruta para actualizar una propiedad
-router.put('/property/:id', propertyController.updateProperty);
-
-// Ruta para obtener propiedades filtradas
-router.get('/filter', propertyController.filterProperties);
-
-router.get('/about', (req, res) => {
-    res.render('about');
+// Configuración de Multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../public/assets/img/properties'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
 });
 
-router.get('/contact', (req, res) => {
-    res.render('contact');
+const upload = multer({ storage: storage });
+
+// Ruta para crear una propiedad
+router.get('/create-property', ensureAdmin, (req, res) => {
+    res.render('property/create-property');
 });
+router.post('/create-property', ensureAdmin, upload.array('img', 10), propertyController.createProperty);
+
+// Ruta para listar propiedades activas y seleccionar una para editar
+router.get('/list-properties', ensureAdmin, propertyController.listProperties);
 
 module.exports = router;

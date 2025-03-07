@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="img/logo/logo.png" rel="icon">
+    <title>RuangAdmin - Crear Propietario</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/ruang-admin.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <%- include('../admin/partials/sidebar') %>
+        <!-- Sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <%- include('../admin/partials/topbar') %>
+                <!-- Topbar -->
+
+                <!-- Container Fluid-->
+                <div class="container-fluid" id="container-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9">
+                            <!-- Form Basic -->
+                            <div class="card mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
+                                    <h6 class="m-0 font-weight-bold text-primary display-4">Crear Propietario</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/admin/create-owner" method="POST">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apellido">Apellido</label>
+                                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tipo_documento">Tipo de Documento</label>
+                                            <select class="form-control" id="tipo_documento" name="tipo_documento" required>
+                                                <option value="CC">CC</option>
+                                                <option value="NIT">NIT</option>
+                                                <option value="CE">CE</option>
+                                                <option value="Pasaporte">Pasaporte</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="numero_documento">Número de Documento</label>
+                                            <input type="text" class="form-control" id="numero_documento" name="numero_documento" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="telefono">Teléfono</label>
+                                            <input type="text" class="form-control" id="telefono" name="telefono">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ciudad">Ciudad</label>
+                                            <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Crear Propietario</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to logout?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                            <a href="/auth/logout" class="btn btn-primary">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---Container Fluid-->
+                    </div>
+                    <!-- Footer -->
+                    <%- include('../admin/partials/footer') %>
+                    <!-- Footer -->
+                </div>
+            </div>
+
+            <!-- Scroll to top -->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <%- include('../admin/partials/scripts') %>
+        </div>
+    </div>
+</body>
+
+</html>

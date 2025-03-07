@@ -33,110 +33,72 @@
 
 <body>
 
-	<div class="site-mobile-menu site-navbar-target">
-		<div class="site-mobile-menu-header">
-			<div class="site-mobile-menu-close">
-				<span class="icofont-close js-menu-toggle"></span>
-			</div>
-		</div>
-		<div class="site-mobile-menu-body"></div>
-	</div>
+	<%- include('partials/navbar') %>
 
-	<nav class="site-nav">
-		<div class="container">
-			<div class="menu-bg-wrap">
-				<div class="site-navigation">
-					<a href="index.html" class="logo m-0 float-start">Property</a>
+		<div class="hero page-inner overlay" style="background-color: var(--bs-primary)">
 
-					<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-						<li><a href="/">Home</a></li>
-						<li class="has-children">
-							<a href="/">Propiedades</a>
-							<ul class="dropdown">
-								<li><a href="#">Buy Property</a></li>
-								<li><a href="#">Sell Property</a></li>
-								<li class="has-children">
-									<a href="#">Dropdown</a>
-									<ul class="dropdown">
-										<li><a href="#">Sub Menu One</a></li>
-										<li><a href="#">Sub Menu Two</a></li>
-										<li><a href="#">Sub Menu Three</a></li>
-									</ul>
+			<div class="container">
+				<div class="row justify-content-center align-items-center">
+					<div class="col-lg-9 text-center mt-5">
+						<h1 class="heading" data-aos="fade-up">About</h1>
+
+						<nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+							<ol class="breadcrumb text-center justify-content-center">
+								<li class="breadcrumb-item "><a href="/">Home</a></li>
+								<li class="breadcrumb-item active text-white-50" aria-current="page">Acerca de Nosotros
 								</li>
-							</ul>
-						</li>
-						<li><a href="services.html">Services</a></li>
-						<li class="active"><a href="/about">Acerca de Nosotros</a></li>
-						<li><a href="/contact">Contáctanos</a></li>
-					</ul>
-
-					<a href="#"
-						class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
-						data-toggle="collapse" data-target="#main-navbar">
-						<span></span>
-					</a>
-
+							</ol>
+						</nav>
+					</div>
 				</div>
 			</div>
 		</div>
-	</nav>
 
-	<div class="hero page-inner overlay" style="background-image: url('assets/images/hero_bg_3.jpg');">
 
-		<div class="container">
-			<div class="row justify-content-center align-items-center">
-				<div class="col-lg-9 text-center mt-5">
-					<h1 class="heading" data-aos="fade-up">About</h1>
-
-					<nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
-						<ol class="breadcrumb text-center justify-content-center">
-							<li class="breadcrumb-item "><a href="/">Home</a></li>
-							<li class="breadcrumb-item active text-white-50" aria-current="page">Acerca de Nosotros</li>
-						</ol>
-					</nav>
+		<div class="section">
+			<div class="container">
+				<div class="row text-left mb-5">
+					<div class="col-12">
+						<h2 class="font-weight-bold heading text-primary mb-4 text-center">Acerca de Nosotros</h2>
+					</div>
+					<div class="col-lg-12">
+						<p class="text-black-50 lead">En Aguilar Negocios Inmobiliarios, nos especializamos en la
+							compra, venta y
+							alquiler de propiedades, ofreciendo un servicio confiable y transparente. Contamos con un
+							equipo
+							de profesionales altamente capacitados que brindan asesoramiento personalizado para ayudar a
+							nuestros clientes a tomar las mejores decisiones en bienes raíces. Nos distinguimos por
+							nuestro
+							compromiso con la excelencia, la ética y la satisfacción de nuestros clientes.</p>
+					</div>
+				</div>
+				<div class="row text-left mb-5">
+					<div class="col-12">
+						<h2 class="font-weight-bold heading text-primary mb-4 text-center">Misión</h2>
+					</div>
+					<div class="col-lg-12">
+						<p class="text-black-50 lead">Brindar soluciones inmobiliarias integrales con profesionalismo,
+							confianza
+							y transparencia, ayudando a nuestros clientes a encontrar la propiedad ideal o a cerrar
+							transacciones exitosas. Nos esforzamos por ofrecer un servicio de alta calidad basado en la
+							atención personalizada y el conocimiento del mercado.</p>
+					</div>
+				</div>
+				<div class="row text-left mb-5">
+					<div class="col-12">
+						<h2 class="font-weight-bold heading text-primary mb-4 text-center">Visión</h2>
+					</div>
+					<div class="col-lg-12">
+						<p class="text-black-50 lead">Ser la empresa líder en el sector inmobiliario, reconocida por
+							nuestra integridad, innovación y calidad de servicio. Aspiramos a consolidarnos como la
+							mejor opción para quienes buscan comprar, vender o alquilar propiedades, generando
+							relaciones de largo plazo con nuestros clientes y aliados estratégicos.</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-
-	<div class="section">
-		<div class="container">
-			<div class="row text-left mb-5">
-				<div class="col-12">
-					<h2 class="font-weight-bold heading text-primary mb-4 text-center">Acerca de Nosotros</h2>
-				</div>
-				<div class="col-lg-12">
-					<p class="text-black-50 lead">En Aguilar Negocios Inmobiliarios, nos especializamos en la compra, venta y
-						alquiler de propiedades, ofreciendo un servicio confiable y transparente. Contamos con un equipo
-						de profesionales altamente capacitados que brindan asesoramiento personalizado para ayudar a
-						nuestros clientes a tomar las mejores decisiones en bienes raíces. Nos distinguimos por nuestro
-						compromiso con la excelencia, la ética y la satisfacción de nuestros clientes.</p>
-				</div>
-			</div>
-			<div class="row text-left mb-5">
-				<div class="col-12">
-					<h2 class="font-weight-bold heading text-primary mb-4 text-center">Misión</h2>
-				</div>
-				<div class="col-lg-12">
-					<p class="text-black-50 lead">Brindar soluciones inmobiliarias integrales con profesionalismo, confianza
-						y transparencia, ayudando a nuestros clientes a encontrar la propiedad ideal o a cerrar
-						transacciones exitosas. Nos esforzamos por ofrecer un servicio de alta calidad basado en la
-						atención personalizada y el conocimiento del mercado.</p>
-				</div>
-			</div>
-			<div class="row text-left mb-5">
-				<div class="col-12">
-					<h2 class="font-weight-bold heading text-primary mb-4 text-center">Visión</h2>
-				</div>
-				<div class="col-lg-12">
-					<p class="text-black-50 lead">Ser la empresa líder en el sector inmobiliario, reconocida por nuestra integridad, innovación y calidad de servicio. Aspiramos a consolidarnos como la mejor opción para quienes buscan comprar, vender o alquilar propiedades, generando relaciones de largo plazo con nuestros clientes y aliados estratégicos.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-		<div class="section pt-0">
+		<!-- <div class="section pt-0">
 			<div class="container">
 				<div class="row justify-content-between mb-5">
 					<div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
@@ -232,7 +194,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="section">
 			<div class="container">
 				<div class="row">

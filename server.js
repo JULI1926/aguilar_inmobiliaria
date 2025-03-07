@@ -9,8 +9,12 @@ const flash = require('connect-flash');
 
 
 const propertyRoutes = require('./routes/propertyRoutes');
-const adminRouter = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/authRoutes');
+const ownerRoutes = require('./routes/ownerRoutes');
+const indexRoutes = require('./routes/indexRoutes');
+
+
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(64).toString('hex');
 
@@ -53,9 +57,17 @@ app.use('/admin', express.static(path.join(__dirname, 'public/admin')));
 
 // Usar las rutas definidas en propertyRoutes
 
-app.use('/', propertyRoutes);
+app.use('/', indexRoutes); // Usa las rutas de la página de inicio
+app.use('/admin', propertyRoutes);
+app.use('/admin', adminRoutes);
+app.use('/admin', ownerRoutes);
 app.use('/auth', authRoutes); // Usar las rutas de autenticación
-app.use('/admin', adminRouter);
+
+
+// Manejo de errores
+app.use((req, res, next) => {
+  res.status(404).render('404', { pageTitle: 'Page Not Found' });
+})
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
