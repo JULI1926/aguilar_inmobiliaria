@@ -9,7 +9,8 @@
     "createdb": "sequelize db:migrate",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "seed:undo:all": "sequelize db:seed:undo:all"
+    "seed:undo:all": "sequelize db:seed:undo:all",
+    "db:init": "del database.sqlite && npm run createdb && npm run migrate && npm run seed"
   },
   "keywords": [],
   "author": "",

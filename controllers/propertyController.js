@@ -111,9 +111,9 @@ const listProperties = async (req, res) => {
 
 const createProperty = async (req, res) => {
   try {
-    const { saleRent, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
+    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
     const property = await Property.create({
-      saleRent, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
+      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
     });
 
     if (req.files && req.files.length > 0) {
@@ -193,7 +193,7 @@ const filterProperties = async (req, res) => {
 
 const updateProperty = async (req, res) => {
   try {
-    const { saleRent, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
+    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
     const img = req.file ? req.file.filename : null;
 
     const property = await Property.findByPk(req.params.id);
@@ -201,7 +201,8 @@ const updateProperty = async (req, res) => {
       return res.status(404).send('Property not found');
     }
 
-    property.saleRent = saleRent;
+    property.transactionType = transactionType;
+    property.price = price;
     property.address = address;
     property.area = area;
     property.rooms = rooms;

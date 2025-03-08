@@ -4,9 +4,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Properties', [
       {
-        saleRent: "Arrendo | $700000",       
+        transactionType: "Arrendo",
+        price: 700000,
         address: "Carrera 47",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -16,13 +17,19 @@ module.exports = {
         status: "active",
         ownerId: 1,
         description: "Hermosa propiedad ubicada en una zona tranquila, con amplios espacios y excelente iluminación natural.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        saleRent: "Venta | $350.000.000",        
+        transactionType: "Venta",
+        price: 350000000,
         address: "Carrera 77",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -32,13 +39,19 @@ module.exports = {
         status: "active",
         ownerId: 2,
         description: "Propiedad en venta con acabados de lujo, ideal para familias grandes, ubicada cerca de parques y centros comerciales.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        saleRent: "Venta | $580.000",        
+        transactionType: "Venta",
+        price: 580000,
         address: "Carrera 81",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -48,13 +61,19 @@ module.exports = {
         status: "active",
         ownerId: 3,
         description: "Espaciosa propiedad en venta, con jardín privado y excelente distribución de espacios.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        saleRent: "Arrendo | $650.000",        
+        transactionType: "Arrendo",
+        price: 650000,
         address: "Carrera 92",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -64,13 +83,19 @@ module.exports = {
         status: "active",
         ownerId: 4,
         description: "Propiedad en arriendo, ideal para oficinas o negocios, ubicada en una zona de alto tráfico.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        saleRent: "Venta | $300.000.000",        
+        transactionType: "Venta",
+        price: 300000000,
         address: "Carrera 34",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -80,13 +105,19 @@ module.exports = {
         status: "active",
         ownerId: 1,
         description: "Propiedad en venta con excelente ubicación, cerca de colegios y transporte público.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        saleRent: "Venta | $650.000.000",        
+        transactionType: "Venta",
+        price: 650000000,
         address: "Carrera 65",
-        area: "340m2",
+        area: "340",
         rooms: 5,
         bathrooms: 2,
         garage: 1,
@@ -96,6 +127,11 @@ module.exports = {
         status: "active",
         ownerId: 2,
         description: "Propiedad de lujo en venta, con piscina y amplias áreas sociales, ideal para el entretenimiento.",
+        residential_stratum: 3,
+        property_type: "Casa",
+        property_condition: "usado",
+        floor: 1,
+        year_built: 2000,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -122,6 +158,30 @@ module.exports = {
       {
         propertyId: property.id,
         img: `assets/img/properties/property-${index + 1}-3.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-4.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-5.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-6.jpg`,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        propertyId: property.id,
+        img: `assets/img/properties/property-${index + 1}-7.jpg`,
         createdAt: new Date(),
         updatedAt: new Date()
       }

@@ -46,8 +46,41 @@
                         </div>
                         <div id="image-preview" class="mt-3"></div>
                         <div class="form-group">
-                          <label for="saleRent">Sale/Rent</label>
-                          <input type="text" class="form-control" id="saleRent" name="saleRent" required>
+                          <label for="transactionType">Tipo de Negocio</label>
+                          <select class="form-control" id="transactionType" name="transactionType" required>
+                            <option value="Sale">Venta</option>
+                            <option value="Rent">Arrendo</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="property_type">Tipo de Propiedad</label>
+                          <select class="form-control" id="property_type" name="property_type" required>
+                            <option value="Local">Local</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Terreno">Terreno</option>
+                            <option value="Finca">Finca</option>
+                            <option value="Oficina">Oficina</option>
+                            <option value="Casa de campo">Casa de campo</option>
+                            <option value="Bodega">Bodega</option>
+                            <option value="Casa en conjunto cerrado">Casa en conjunto cerrado</option>
+                            <option value="Casa en condominio">Casa en condominio</option>
+                            <option value="Penthouse">Penthouse</option>
+                            <option value="Nave industrial">Nave industrial</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="property_condition">Condición de la Propiedad</label>
+                          <select class="form-control" id="property_condition" name="property_condition" required>
+                            <option value="nuevo">Nuevo</option>
+                            <option value="usado">Usado</option>
+                            <option value="en construcción">En construcción</option>
+                            <option value="remodelado">Remodelado</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="price">Precio</label>
+                          <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="form-group">
                           <label for="address">Dirección</label>
@@ -82,7 +115,7 @@
                           <input type="text" class="form-control" id="neighborhood" name="neighborhood" required>
                         </div>
                         <div class="form-group">
-                          <label for="status">Estrato</label>
+                          <label for="status">Estado</label>
                           <input type="text" class="form-control" id="status" name="status" required>
                         </div>
                         <div class="form-group">
@@ -91,8 +124,19 @@
                         </div>
                         <div class="form-group">
                           <label for="description">Descripción</label>
-                          <textarea class="form-control" id="description" name="description" rows="3"
-                            required></textarea>
+                          <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="residential_stratum">Estrato Residencial</label>
+                          <input type="number" class="form-control" id="residential_stratum" name="residential_stratum" min="1" max="6" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="floor">Piso</label>
+                          <input type="number" class="form-control" id="floor" name="floor" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="year_built">Año de Construcción</label>
+                          <input type="number" class="form-control" id="year_built" name="year_built" required>
                         </div>
                         <div class="text-center">
                           <button type="submit" class="btn btn-primary">Create Property</button>
@@ -137,9 +181,7 @@
 
         <%- include('../admin/partials/scripts') %>
         <script src="/admin/js/list-properties.js"></script>
-
         
-
 </body>
 
 </html>

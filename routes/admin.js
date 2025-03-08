@@ -2,7 +2,7 @@
 const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
-const path = require('path');
+
 
 
 // Ruta para el dashboard del administrador

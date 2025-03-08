@@ -49,39 +49,41 @@
                         <thead class="thead-light">
                           <tr>
                             <th>ID</th>
-                            <th>Sale/Rent</th>
-                            <th>Address</th>
-                            <th>Area</th>
-                            <th>Rooms</th>
-                            <th>Bathrooms</th>
+                            <th>Tipo de Negocio</th>
+                            <th>Precio</th>
+                            <th>Dirección</th>
+                            <th>Área</th>
+                            <th>Habitaciones</th>
+                            <th>Baños</th>
                             <th>Garage</th>
-                            <th>Department</th>
-                            <th>City</th>
-                            <th>Neighborhood</th>
-                            <th>Status</th>
-                            <th>Owner ID</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Actions</th>
+                            <th>Departmento</th>
+                            <th>Ciudad</th>
+                            <th>Barrio</th>
+                            <th>Estado</th>
+                            <th>Propietario</th>
+                            <th>Descripción</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
                         <tfoot>
                           <tr>
                             <th>ID</th>
-                            <th>Sale/Rent</th>
-                            <th>Address</th>
-                            <th>Area</th>
-                            <th>Rooms</th>
-                            <th>Bathrooms</th>
+                            <th>Tipo de Negocio</th>
+                            <th>Precio</th>
+                            <th>Dirección</th>
+                            <th>Área</th>
+                            <th>Habitaciones</th>
+                            <th>Baños</th>
                             <th>Garage</th>
-                            <th>Department</th>
-                            <th>City</th>
-                            <th>Neighborhood</th>
-                            <th>Status</th>
-                            <th>Owner ID</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Actions</th>
+                            <th>Departmento</th>
+                            <th>Ciudad</th>
+                            <th>Barrio</th>
+                            <th>Estado</th>
+                            <th>Propietario</th>
+                            <th>Descripción</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
                           </tr>
                         </tfoot>
                         <tbody>
@@ -91,7 +93,10 @@
                                 <%= property.id %>
                               </td>
                               <td>
-                                <%= property.saleRent %>
+                                <%= property.transactionType %>
+                              </td>
+                              <td>
+                                <%= property.price %>
                               </td>
                               <td>
                                 <%= property.address %>

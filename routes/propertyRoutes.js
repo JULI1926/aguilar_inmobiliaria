@@ -3,7 +3,7 @@ const router = express.Router();
 const propertyController = require('../controllers/propertyController');
 const multer = require('multer');
 const { ensureAuthenticated, ensureAdmin } = require('../middleware/auth');
-
+const path = require('path');
 
 // Configuración de Multer
 const storage = multer.diskStorage({
