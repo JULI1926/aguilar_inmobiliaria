@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs');
 const { User } = require('../models'); // Asegúrate de tener un modelo User
 
 passport.use(new LocalStrategy(
+  {
+    usernameField: 'email', // Especifica que el campo de autenticación es 'email'
+    passwordField: 'password'
+  },
   async (email, password, done) => {
     try {
       const user = await User.findOne({ where: { email } });
