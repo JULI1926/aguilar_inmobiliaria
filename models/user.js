@@ -38,11 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: Sequelize.NOW
     }
   });
-
-  User.prototype.validPassword = function (password) {
-    // Implementa la lógica para validar la contraseña
-    return this.password === password;
-  };
+  
 
   return User;
 };
