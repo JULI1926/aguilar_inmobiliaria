@@ -10,16 +10,22 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     try {
+      console.log(`Attempting to authenticate user with email: ${email}`);
       const user = await User.findOne({ where: { email } });
       if (!user) {
+        console.log('Usuario Incorrecto.');
         return done(null, false, { message: 'Usuario Incorrecto.' });
       }
+      console.log(`User found: ${JSON.stringify(user)}`);
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
+        console.log('Contraseña Incorrecta.');
         return done(null, false, { message: 'Contraseña Incorrecta.' });
       }
+      console.log('Authentication successful.');
       return done(null, user);
     } catch (err) {
+      console.error('Error during authentication:', err);
       return done(err);
     }
   }
