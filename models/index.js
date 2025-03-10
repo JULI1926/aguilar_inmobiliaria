@@ -1,11 +1,17 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.sqlite'
-});
-
 console.log(`Database URL: ${process.env.DATABASE_URL}`);
+
+// Configurar Sequelize para usar PostgreSQL
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
 
 // Importar los modelos correctamente sin requerir `sequelize` dentro de ellos
 const Owner = require('./owner')(sequelize, DataTypes);
