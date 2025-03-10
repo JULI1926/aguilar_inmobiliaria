@@ -5,6 +5,8 @@ const sequelize = new Sequelize({
   storage: './database.sqlite'
 });
 
+console.log(`Database URL: ${process.env.DATABASE_URL}`);
+
 // Importar los modelos correctamente sin requerir `sequelize` dentro de ellos
 const Owner = require('./owner')(sequelize, DataTypes);
 const Property = require('./property')(sequelize, DataTypes);
