@@ -11,6 +11,11 @@ passport.use(new LocalStrategy(
   async (email, password, done) => {
     try {
       console.log(`Attempting to authenticate user with email: ${email}`);
+      
+      // Imprimir todos los correos electrónicos en la tabla Users
+      const allUsers = await User.findAll({ attributes: ['email'] });
+      console.log('All users emails:', allUsers.map(user => user.email));
+      
       const user = await User.findOne({ where: { email } });
       if (!user) {
         console.log('Usuario Incorrecto.');
