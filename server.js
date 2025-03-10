@@ -1,4 +1,5 @@
 const express = require('express');
+const { Sequelize } = require('sequelize');
 const session = require('express-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -17,6 +18,26 @@ const secretKey = crypto.randomBytes(64).toString('hex');
 
 const app = express();
 const port = process.env.PORT || 3000; // Usar el puerto proporcionado por Heroku o 3000 por defecto
+
+// Configurar Sequelize
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
+// Verificar la conexión a la base de datos
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
