@@ -101,7 +101,7 @@ const listProperties = async (req, res) => {
   try {
     const properties = await Property.findAll({ where: { status: 'active' }, raw: true });   
 
-    res.render('admin/list-properties', { properties });
+    res.render('property/list-properties', { properties });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
