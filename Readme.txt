@@ -9,3 +9,6 @@ License: https://bootstrapmade.com/license/
 netstat -ano | findstr :3000
 taskkill /PID xxxx /F
 
+Manera de ejecutar comandos Heroku
+
+heroku run -- npx sequelize-cli db:seed --seed 20250216011028-demo-users.js

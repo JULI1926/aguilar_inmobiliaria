@@ -120,7 +120,11 @@
                         </div>
                         <div class="form-group">
                           <label for="ownerId">Propietario</label>
-                          <input type="number" class="form-control" id="ownerId" name="ownerId" required>
+                          <select class="form-control" id="ownerId" name="ownerId" required>
+                            <% owners.forEach(owner => { %>
+                              <option value="<%= owner.id %>"><%= owner.nombre %> <%= owner.apellido %></option>
+                            <% }) %>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label for="description">Descripción</label>

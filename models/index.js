@@ -1,17 +1,32 @@
+require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 
 console.log(`Database URL: ${process.env.DATABASE_URL}`);
 
+
+const env = process.env.NODE_ENV || 'development';
+const databaseUrl = process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL_PROD : process.env.DATABASE_URL_DEV;
+
 // Configurar Sequelize para usar PostgreSQL
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
+let sequelize;
+if (env === 'production') {
+  // Configurar Sequelize para usar PostgreSQL en producción
+  sequelize = new Sequelize(databaseUrl, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
-  }
-});
+  });
+} else {
+  // Configurar Sequelize para usar SQLite en desarrollo y prueba
+  sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: databaseUrl.split('sqlite://')[1]
+  });
+}
 
 // Importar los modelos correctamente sin requerir `sequelize` dentro de ellos
 const Owner = require('./owner')(sequelize, DataTypes);

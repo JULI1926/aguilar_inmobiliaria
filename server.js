@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { Sequelize } = require('sequelize');
 const session = require('express-session');
@@ -19,16 +20,29 @@ const secretKey = crypto.randomBytes(64).toString('hex');
 const app = express();
 const port = process.env.PORT || 3000; // Usar el puerto proporcionado por Heroku o 3000 por defecto
 
-// Configurar Sequelize
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
+// Seleccionar la URL de la base de datos según el entorno
+const env = process.env.NODE_ENV || 'development';
+const databaseUrl = env === 'production' ? process.env.DATABASE_URL_PROD : process.env.DATABASE_URL_DEV;
+
+let sequelize;
+if (env === 'production') {
+  // Configurar Sequelize para usar PostgreSQL en producción
+  sequelize = new Sequelize(databaseUrl, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
-  }
-});
+  });
+} else {
+  // Configurar Sequelize para usar SQLite en desarrollo y prueba
+  sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: databaseUrl.split('sqlite://')[1]
+  });
+}
 
 // Verificar la conexión a la base de datos
 sequelize.authenticate()

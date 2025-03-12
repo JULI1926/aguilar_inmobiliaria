@@ -1,4 +1,4 @@
-const { Property, PropertyImage } = require('../models');
+const { Property, PropertyImage, Owner } = require('../models');
 const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
@@ -107,6 +107,20 @@ const listProperties = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+const createPropertyForm = async (req, res) => {
+  try {
+    // Obtiene la lista de propietarios de la base de datos
+    const owners = await Owner.findAll();
+    
+    // Renderiza la vista del formulario de creación de propiedades y pasa la lista de propietarios
+    res.render('property/create-property', { owners });
+  } catch (error) {
+    console.error('Error fetching owners:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
 
 const createProperty = async (req, res) => {
@@ -234,4 +248,5 @@ module.exports = {
   createProperty,
   filterProperties,
   listProperties,
+  createPropertyForm,
 };

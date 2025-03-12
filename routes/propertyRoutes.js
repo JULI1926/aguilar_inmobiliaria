@@ -18,9 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Ruta para crear una propiedad
-router.get('/create-property', ensureAdmin, (req, res) => {
-    res.render('property/create-property');
-});
+router.get('/create-property', ensureAdmin, propertyController.createPropertyForm);
 router.post('/create-property', ensureAdmin, upload.array('img', 10), propertyController.createProperty);
 
 // Ruta para listar propiedades activas y seleccionar una para editar
