@@ -45,6 +45,9 @@
                       <h6 class="m-0 font-weight-bold text-primary">Properties</h6>
                     </div>
                     <div class="table-responsive p-3">
+                      <div class="scroll-top">
+                        <div class="scroll-content"></div>
+                      </div>
                       <table class="table align-items-center table-flush" id="dataTable">
                         <thead class="thead-light">
                           <tr>
@@ -61,6 +64,10 @@
                             <th>Barrio</th>
                             <th>Estado</th>
                             <th>Propietario</th>
+                            <th>Estrato</th>
+                            <th>Condición</th>
+                            <th>Piso</th>
+                            <th>Año de Construcción</th>
                             <th>Descripción</th>
                             <th>Imagen</th>
                             <th>Acciones</th>
@@ -81,6 +88,10 @@
                             <th>Barrio</th>
                             <th>Estado</th>
                             <th>Propietario</th>
+                            <th>Estrato</th>
+                            <th>Tipo</th>
+                            <th>Piso</th>
+                            <th>Año</th>
                             <th>Descripción</th>
                             <th>Imagen</th>
                             <th>Acciones</th>
@@ -128,6 +139,18 @@
                               <td>
                                 <%= property.ownerId %>
                               </td>
+                              <td>
+                                <%= property.residential_stratum %>
+                              </td>
+                              <td>
+                                <%= property.property_condition %>
+                              </td>
+                              <td>
+                                <%= property.floor %>
+                              </td>
+                              <td>
+                                <%= property.year_built %>
+                              </td>                                                         
                               <td>
                                 <%= property.description.length> 50 ? property.description.substring(0, 50) + '...' :
                                   property.description %>
@@ -204,6 +227,7 @@
       </a>
 
       <%- include('../admin/partials/scripts') %>
+      
 
         <!-- Page level custom scripts -->
         <script>
@@ -211,6 +235,7 @@
             $('#dataTable').DataTable(); // ID From dataTable 
           });
         </script>
+        <script src="/admin/js/top-scroll.js"></script>
 
 </body>
 
