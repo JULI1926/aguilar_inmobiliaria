@@ -42,6 +42,7 @@ const getProperties = async (req, res) => {
 const renderIndexPage = async (req, res) => {
   try {
     const properties = await Property.findAll({
+      where: { status: 'active' },
       include: [{
         model: PropertyImage,
         as: 'images',
