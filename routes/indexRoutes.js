@@ -26,4 +26,8 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+router.get('/privacy-policy', (req, res) => {
+    res.render('privacy-policy');
+});
+
 module.exports = router;
