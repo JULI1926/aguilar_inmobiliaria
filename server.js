@@ -87,6 +87,7 @@ app.use(express.static(path.join(__dirname, 'assets')));
 // Servir archivos estáticos específicos para la ruta '/admin'
 app.use('/admin', express.static(path.join(__dirname, 'public/admin')));
 
+
 // Usar las rutas definidas en propertyRoutes
 app.use('/', indexRoutes); // Usa las rutas de la página de inicio
 app.use('/admin', propertyRoutes);

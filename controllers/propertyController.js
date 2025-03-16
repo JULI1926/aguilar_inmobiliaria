@@ -206,35 +206,73 @@ const filterProperties = async (req, res) => {
   }
 };
 
-const updateProperty = async (req, res) => {
+const editPropertyForm = async (req, res) => {
   try {
-    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
-    const img = req.file ? req.file.filename : null;
+    const { id } = req.params;
+    const property = await Property.findByPk(id, {
+      include: [{ model: PropertyImage, as: 'images' }]
+    });
+    const owners = await Owner.findAll();
 
-    const property = await Property.findByPk(req.params.id);
     if (!property) {
       return res.status(404).send('Property not found');
     }
 
-    property.transactionType = transactionType;
-    property.price = price;
-    property.address = address;
-    property.area = area;
-    property.rooms = rooms;
-    property.bathrooms = bathrooms;
-    property.garage = garage;
-    property.department = department;
-    property.city = city;
-    property.neighborhood = neighborhood;
-    property.status = status;
-    property.ownerId = ownerId;
-    property.description = description;
-    if (img) {
-      property.img = img;
+    res.render('property/edit-property', { property, owners });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+};
+
+// Otras funciones del controlador...
+
+
+const editProperty = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description, existingImages } = req.body;
+
+    // Actualizar la propiedad
+    const property = await Property.findByPk(id);
+    if (!property) {
+      return res.status(404).send('Property not found');
     }
 
-    await property.save();
-    res.redirect('/admin/dashboard');
+    await property.update({
+      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
+    });
+
+    // Manejar las imágenes existentes
+    const existingImageIds = existingImages ? existingImages.split(',') : [];
+    const currentImages = await PropertyImage.findAll({ where: { propertyId: id } });
+
+    // Eliminar imágenes que no están en la lista de imágenes existentes
+    const imagesToDelete = currentImages.filter(img => !existingImageIds.includes(img.id.toString()));
+    await Promise.all(imagesToDelete.map(img => {
+      fs.unlinkSync(path.join(__dirname, '../public', img.img)); // Eliminar el archivo del sistema de archivos
+      return img.destroy(); // Eliminar el registro de la base de datos
+    }));
+
+    // Manejar nuevas imágenes
+    if (req.files && req.files.length > 0) {
+      const imagePaths = [];
+
+      req.files.forEach((file, index) => {
+        const newFileName = `property-${property.id}-${Date.now()}-${index + 1}${path.extname(file.originalname)}`;
+        const newPath = path.join(__dirname, '../public/assets/img/properties', newFileName);
+
+        // Mover el archivo a la nueva ubicación con el nuevo nombre
+        fs.renameSync(file.path, newPath);
+
+        // Guardar la ruta relativa en la base de datos
+        imagePaths.push(`assets/img/properties/${newFileName}`);
+      });
+
+      await Promise.all(imagePaths.map(img => PropertyImage.create({ propertyId: property.id, img })));
+    }
+
+    res.redirect('/');
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
@@ -245,7 +283,8 @@ module.exports = {
   getProperties,
   renderIndexPage,
   getProperty,
-  updateProperty,
+  editProperty,
+  editPropertyForm,
   createProperty,
   filterProperties,
   listProperties,
