@@ -1,35 +1,14 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="favicon.png">
-
-  <meta name="description" content="" />
-  <meta name="keywords" content="bootstrap, bootstrap5" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/assets/fonts/icomoon/style.css">
-  <link rel="stylesheet" href="/assets/fonts/flaticon/font/flaticon.css">
-
-  <link rel="stylesheet" href="/assets/css/tiny-slider.css">
-  <link rel="stylesheet" href="/assets/css/aos.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-
-  <title>Property &mdash; Free Bootstrap 5 Website Template by Untree.co</title>
-</head>
+<%- include('partials/header', { pageTitle: 'Detalles de la propiedad' }) %>
 <body>
 
   <%- include('partials/navbar') %>
 
-  <div class="hero page-inner overlay" style="background-image: url('<%= baseUrl + property.img %>');">
+  <div class="hero page-inner overlay" style="background-color: var(--bs-primary)">
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-lg-9 text-center mt-0">
+        <div class="col-lg-9 text-center mt-5">
           <h1 class="heading" data-aos="fade-up"><%= property.address %></h1>
 
           <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">

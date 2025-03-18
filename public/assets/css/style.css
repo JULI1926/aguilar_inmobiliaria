@@ -9202,7 +9202,7 @@ textarea.form-control-lg {
 
 img.logo2 {
       width: auto;  /* O un valor específico */
-      height: 150px !important; /* O un valor específico */
+      height: 127px !important; /* O un valor específico */
       max-width: 100%; /* Para que no se desborde */
       background: none;
       margin-right: 40px !important;
@@ -9702,6 +9702,7 @@ textarea {
     color: #fff;
     font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     margin-bottom: 30px;
+    margin-top: 140px;
     font-weight: 600; }
   .hero .lead {
     color: #fff;
