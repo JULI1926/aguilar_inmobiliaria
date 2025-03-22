@@ -31,10 +31,11 @@ router.post('/forgot-password', userController.forgotPassword);
 // Ruta para mostrar el formulario de restablecimiento de contraseña
 router.get('/reset-password/:token', (req, res) => {
   const { token } = req.params;
-  res.render('auth/resetPassword', { token }); // Renderiza la vista resetPassword.ejs con el token
+  res.render('admin/resetPassword', { token, message: null }); // Renderiza la vista resetPassword.ejs con el token
 });
 
 // Ruta para procesar el restablecimiento de contraseña
 router.post('/reset-password/:token', userController.resetPassword);
+
 
 module.exports = router;

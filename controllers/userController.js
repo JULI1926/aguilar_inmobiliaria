@@ -37,7 +37,7 @@ exports.forgotPassword = async (req, res) => {
       from: process.env.EMAIL_USER,
       subject: 'Recuperación de contraseña',
       text: `Has solicitado restablecer tu contraseña. Haz clic en el siguiente enlace o cópialo en tu navegador para continuar: 
-      ${process.env.BASE_URL}/reset-password/${token}`
+      ${process.env.BASE_URL}/auth/reset-password/${token}`
     };
 
     await transporter.sendMail(mailOptions);
