@@ -1,6 +1,7 @@
 const express = require('express');
 const propertyController = require('../controllers/propertyController');
 const router = express.Router();
+const contactController = require('../controllers/contactController');
 
 router.get('/', propertyController.renderIndexPage);
 
@@ -23,6 +24,9 @@ router.get('/about', (req, res) => {
 router.get('/contact', (req, res) => {
     res.render('contact');
 });
+
+// Manejo del formulario de contacto
+router.post('/contact', contactController.handleContactForm);
 
 router.get('/privacy-policy', (req, res) => {
     res.render('privacy-policy');
