@@ -1,162 +1,142 @@
 <!doctype html>
 <html lang="en">
 <%- include('partials/header', { pageTitle: 'Detalles de la propiedad' }) %>
-<body>
 
-  <%- include('partials/navbar') %>
+  <body>
 
-  <div class="hero page-inner overlay" style="background-color: var(--bs-primary)">
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-lg-9 text-center mt-5">
-          <h1 class="heading" data-aos="fade-up"><%= property.address %></h1>
+    <%- include('partials/navbar') %>
 
-          <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
-            <ol class="breadcrumb text-center justify-content-center">
-              <li class="breadcrumb-item "><a href="/">Home</a></li>
-              <li class="breadcrumb-item "><a href="/properties">Properties</a></li>
-              <li class="breadcrumb-item active text-white-50" aria-current="page"><%= property.address %></li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
+      <div class="hero page-inner overlay" style="background-color: var(--bs-primary)">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-lg-9 text-center mt-5">
+              <h1 class="heading" data-aos="fade-up">
+                <%= property.address %>
+              </h1>
 
-  <div class="section">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-lg-7">
-          <div class="img-property-slide-wrap">
-            <div class="img-property-slide">
-              <% if (property && property.images && property.images.length > 0) { %>
-                <% property.images.slice(1).forEach(image => { %>
-                  <img src="<%= baseUrl + image.img %>" alt="Image" class="img-fluid">
-                <% }) %>
-              <% } else { %>
-                <p>No images available</p>
-              <% } %>
+              <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <ol class="breadcrumb text-center justify-content-center">
+                  <li class="breadcrumb-item "><a href="/">Home</a></li>
+                  <li class="breadcrumb-item "><a href="/properties">Properties</a></li>
+                  <li class="breadcrumb-item active text-white-50" aria-current="page">
+                    <%= property.address %>
+                  </li>
+                </ol>
+              </nav>
             </div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <h2 class="heading text-primary"><% if (property && property.address) { %><%= property.address %><% } %></h2>
-          <p class="property-meta"><%= property.city %> - <%= property.department %></p>
-          <p class="property-description text-black-50"><%= property.description %></p>
-          
-          <div class="specs d-flex mb-4">
-            <span class="d-block d-flex align-items-center me-3">
-              <span class="icon-bed me-2"></span>
-              <span class="caption"><%= property.rooms %> Habitaciones</span>
-            </span>
-            <span class="d-block d-flex align-items-center me-3">
-              <span class="icon-bath me-2"></span>
-              <span class="caption"><%= property.bathrooms %> Baños</span>
-            </span>
-            <span class="d-block d-flex align-items-center me-3">
-              <span class="icon-home me-2"></span>
-              <span class="caption"><%= property.area %> m²</span>
-            </span>
+      </div>
+
+      <div class="section">
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-lg-7">
+              <div class="img-property-slide-wrap">
+                <div class="img-property-slide">
+                  <% if (property && property.images && property.images.length> 0) { %>
+                    <% property.images.slice(1).forEach(image=> { %>
+                      <img src="<%= baseUrl + image.img %>" alt="Image" class="img-fluid">
+                      <% }) %>
+                        <% } else { %>
+                          <p>No images available</p>
+                          <% } %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <h2 class="heading text-primary">
+                <% if (property && property.address) { %>
+                  <%= property.address %>
+                    <% } %>
+              </h2>
+              <p class="property-meta">
+                <%= property.city %> - <%= property.department %>
+              </p>
+
+              <div class="specs d-flex mb-4">
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-bed me-2"></span>
+                  <span class="caption">
+                    <%= property.rooms %> Habitaciones
+                  </span>
+                </span>
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-bath me-2"></span>
+                  <span class="caption">
+                    <%= property.bathrooms %> Baños
+                  </span>
+                </span>
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-home me-2"></span>
+                  <span class="caption">
+                    <%= property.area %> m²
+                  </span>
+                </span>
+              </div>
+
+              <div class="specs d-flex mb-4">
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-money me-2"></span> <!-- Ícono de dinero -->
+                  <span class="caption">$<%= property.price %></span>
+                </span>
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-home me-2"></span>
+                  <span class="caption">
+                    <%= property.garage %> Garajes
+                  </span>
+                </span>
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-home me-2"></span>
+                  <span class="caption">
+                    <%= property.property_type %>
+                  </span>
+                </span>
+              </div>
+
+              <div class="specs d-flex mb-4">
+                <span class="d-block d-flex align-items-center me-3">
+                  <span class="icon-business_center me-2"></span>
+                  <span class="caption">
+                    <% if (property.transactionType==='Sale' ) { %>
+                      Venta
+                      <% } else if (property.transactionType==='Rent' ) { %>
+                        Arrendo
+                        <% } else { %>
+                          <%= property.transactionType %> <!-- Muestra el valor original si no coincide -->
+                            <% } %>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <!-- Descripción en una fila nueva -->
+            <div class="row mt-4">
+              <div class="col-12">
+                <p class="property-description text-black-50">
+                  <%= property.description %>
+                </p>
+              </div>
+            </div>
           </div>
-          
-          <!-- <div class="d-block agent-box p-5">
-            <div class="img mb-4">
-              <img src="/assets/images/person_2-min.jpg" alt="Image" class="img-fluid">
-            </div>
-            <div class="text">
-              <h3 class="mb-0">Alicia Huston</h3>
-              <div class="meta mb-3">Real Estate</div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione laborum quo quos omnis sed magnam id ducimus saepe</p>
-              <ul class="list-unstyled social dark-hover d-flex">
-                <li class="me-1"><a href="#"><span class="icon-instagram"></span></a></li>
-                <li class="me-1"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="me-1"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="me-1"><a href="#"><span class="icon-linkedin"></span></a></li>
-              </ul>
-            </div>
-          </div> -->
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="site-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="widget">
-            <h3>Contact</h3>
-            <address>43 Raymouth Rd. Baltemoer, London 3910</address>
-            <ul class="list-unstyled links">
-              <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-              <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-              <li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
-            </ul>
-          </div> <!-- /.widget -->
-        </div> <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <div class="widget">
-            <h3>Sources</h3>
-            <ul class="list-unstyled float-start links">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Vision</a></li>
-              <li><a href="#">Mission</a></li>
-              <li><a href="#">Terms</a></li>
-              <li><a href="#">Privacy</a></li>
-            </ul>
-            <ul class="list-unstyled float-start links">
-              <li><a href="#">Partners</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">Creative</a></li>
-            </ul>
-          </div> <!-- /.widget -->
-        </div> <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <div class="widget">
-            <h3>Links</h3>
-            <ul class="list-unstyled links">
-              <li><a href="#">Our Vision</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Contact us</a></li>
-            </ul>
+        <%- include('partials/footer') %>
 
-            <ul class="list-unstyled social">
-              <li><a href="#"><span class="icon-instagram"></span></a></li>
-              <li><a href="#"><span class="icon-twitter"></span></a></li>
-              <li><a href="#"><span class="icon-facebook"></span></a></li>
-              <li><a href="#"><span class="icon-linkedin"></span></a></li>
-              <li><a href="#"><span class="icon-pinterest"></span></a></li>
-              <li><a href="#"><span class="icon-dribbble"></span></a></li>
-            </ul>
-          </div> <!-- /.widget -->
-        </div> <!-- /.col-lg-4 -->
-      </div> <!-- /.row -->
+          <!-- Preloader -->
+          <div id="overlayer"></div>
+          <div class="loader">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
 
-      <div class="row mt-5">
-        <div class="col-12 text-center">
-          <p>&copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ --></p>
-        </div>
-      </div>
-    </div>
-  </div> <!-- /.site-footer -->
+          <script src="/assets/js/bootstrap.bundle.min.js"></script>
+          <script src="/assets/js/tiny-slider.js"></script>
+          <script src="/assets/js/aos.js"></script>
+          <script src="/assets/js/navbar.js"></script>
+          <script src="/assets/js/counter.js"></script>
+          <script src="/assets/js/custom.js"></script>
+  </body>
 
-  <!-- Preloader -->
-  <div id="overlayer"></div>
-  <div class="loader">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-
-  <script src="/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/js/tiny-slider.js"></script>
-  <script src="/assets/js/aos.js"></script>
-  <script src="/assets/js/navbar.js"></script>
-  <script src="/assets/js/counter.js"></script>
-  <script src="/assets/js/custom.js"></script>  
-</body>
 </html>

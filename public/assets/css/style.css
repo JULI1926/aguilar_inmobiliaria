@@ -10429,7 +10429,10 @@ nav[aria-label="breadcrumb"] li:before {
 
 .specs .icon-bed,
 .specs .icon-bath,
-.specs .icon-home {
+.specs .icon-home,
+.specs .icon-money,
+.specs .icon-cash,
+.specs .icon-business_center{
   font-size: 20px;
   color: #005555;
 }
@@ -10443,12 +10446,12 @@ nav[aria-label="breadcrumb"] li:before {
   font-family: 'Work Sans', sans-serif; /* Usa una fuente atractiva */
   font-size: 18px; /* Ajusta el tamaño de la fuente */
   font-weight: 400; /* Ajusta el peso de la fuente */
-  color: #444; /* Ajusta el color de la fuente */
+  color: #222; /* Ajusta el color de la fuente */
   background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%); /* Agrega un fondo con gradiente */
   padding: 20px; /* Ajusta el relleno */
   margin-bottom: 20px; /* Ajusta el margen inferior */
   border-radius: 10px; /* Agrega bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra más pronunciada */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   line-height: 1.8; /* Ajusta la altura de línea para mejorar la legibilidad */
   border: 1px solid #ddd; /* Agrega un borde sutil */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agrega una transición suave */
