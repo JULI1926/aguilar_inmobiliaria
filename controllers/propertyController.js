@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY; // Asegúrate de tener tu clave de API de Google Maps en las variables de entorno
 
 const getProperties = async (req, res) => {
   try {
@@ -88,7 +89,7 @@ const getProperty = async (req, res) => {
     });
     const baseUrl = '/';
     if (property) {
-      res.render('property-single', { property, baseUrl });
+      res.render('property-single', { property, baseUrl, googleMapsApiKey });
     } else {
       res.status(404).send('Property not found');
     }
