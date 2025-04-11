@@ -244,6 +244,14 @@ const editPropertyForm = async (req, res) => {
 // Otras funciones del controlador...
 
 
+const formatDescription = (description) => {
+  return description
+    .split('.')
+    .map(sentence => sentence.trim() ? `<b>${sentence.trim()}.</b><br>` : '')
+    .join(' ');
+};
+
+
 const editProperty = async (req, res) => {
   try {
     const { id } = req.params;
@@ -257,7 +265,7 @@ const editProperty = async (req, res) => {
 
     // Actualiza la propiedad
     await property.update({
-      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
+      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description: formatDescription(description)
     });
 
     // Maneja las imágenes existentes
