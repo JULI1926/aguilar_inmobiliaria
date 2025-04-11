@@ -128,8 +128,24 @@ const createPropertyForm = async (req, res) => {
 const createProperty = async (req, res) => {
   try {
     const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description } = req.body;
+
+    // Reemplazar saltos de línea con <br> en la descripción
+    const processedDescription = description.replace(/\n/g, '<br>');
+
     const property = await Property.create({
-      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
+      transactionType,
+      price,
+      address,
+      area,
+      rooms,
+      bathrooms,
+      garage,
+      department,
+      city,
+      neighborhood,
+      status,
+      ownerId,
+      description: processedDescription, // Guardar la descripción procesada
     });
 
     if (req.files && req.files.length > 0) {
@@ -146,7 +162,7 @@ const createProperty = async (req, res) => {
         imagePaths.push(`assets/img/properties/${newFileName}`);
       });
 
-      await Promise.all(imagePaths.map(img => PropertyImage.create({ propertyId: property.id, img })));
+      await Promise.all(imagePaths.map((img) => PropertyImage.create({ propertyId: property.id, img })));
     }
 
     res.redirect('/');
@@ -155,7 +171,6 @@ const createProperty = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
-
 
 const filterProperties = async (req, res) => {
   try {
@@ -234,28 +249,33 @@ const editProperty = async (req, res) => {
     const { id } = req.params;
     const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description, existingImages } = req.body;
 
-    // Actualizar la propiedad
+    // Verifica si la propiedad existe
     const property = await Property.findByPk(id);
     if (!property) {
       return res.status(404).send('Property not found');
     }
 
+    // Actualiza la propiedad
     await property.update({
       transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description
     });
 
-    // Manejar las imágenes existentes
-    const existingImageIds = existingImages ? existingImages.split(',') : [];
+    // Maneja las imágenes existentes
+    const existingImageIds = Array.isArray(existingImages) ? existingImages : [];
     const currentImages = await PropertyImage.findAll({ where: { propertyId: id } });
 
-    // Eliminar imágenes que no están en la lista de imágenes existentes
+    // Elimina imágenes que no están en la lista de imágenes existentes
     const imagesToDelete = currentImages.filter(img => !existingImageIds.includes(img.id.toString()));
-    await Promise.all(imagesToDelete.map(img => {
-      fs.unlinkSync(path.join(__dirname, '../public', img.img)); // Eliminar el archivo del sistema de archivos
-      return img.destroy(); // Eliminar el registro de la base de datos
+    await Promise.all(imagesToDelete.map(async img => {
+      try {
+        fs.unlinkSync(path.join(__dirname, '../public', img.img)); // Elimina el archivo del sistema de archivos
+        await img.destroy(); // Elimina el registro de la base de datos
+      } catch (error) {
+        console.error('Error eliminando imagen:', error);
+      }
     }));
 
-    // Manejar nuevas imágenes
+    // Maneja nuevas imágenes
     if (req.files && req.files.length > 0) {
       const imagePaths = [];
 
@@ -263,19 +283,19 @@ const editProperty = async (req, res) => {
         const newFileName = `property-${property.id}-${Date.now()}-${index + 1}${path.extname(file.originalname)}`;
         const newPath = path.join(__dirname, '../public/assets/img/properties', newFileName);
 
-        // Mover el archivo a la nueva ubicación con el nuevo nombre
+        // Mueve el archivo a la nueva ubicación con el nuevo nombre
         fs.renameSync(file.path, newPath);
 
-        // Guardar la ruta relativa en la base de datos
+        // Guarda la ruta relativa en la base de datos
         imagePaths.push(`assets/img/properties/${newFileName}`);
       });
 
       await Promise.all(imagePaths.map(img => PropertyImage.create({ propertyId: property.id, img })));
     }
 
-    res.redirect('/');
+    res.redirect('/admin/list-properties');
   } catch (error) {
-    console.error(error);
+    console.error('Error en editProperty:', error);
     res.status(500).send('Server Error');
   }
 };

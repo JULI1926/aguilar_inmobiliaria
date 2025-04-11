@@ -13,6 +13,7 @@ const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/authRoutes');
 const ownerRoutes = require('./routes/ownerRoutes');
 const indexRoutes = require('./routes/indexRoutes');
+const methodOverride = require('method-override');
 
 
 const crypto = require('crypto');
@@ -57,6 +58,7 @@ sequelize.authenticate()
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(methodOverride('_method'));
 
 // Configurar sesiones
 app.use(session({
@@ -95,6 +97,7 @@ app.use('/admin', propertyRoutes);
 app.use('/admin', adminRoutes);
 app.use('/admin', ownerRoutes);
 app.use('/auth', authRoutes); // Usar las rutas de autenticación
+
 
 // Manejo de errores
 app.use((req, res, next) => {

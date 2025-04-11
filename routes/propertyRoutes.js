@@ -28,5 +28,17 @@ router.get('/list-properties', ensureAdmin, propertyController.listProperties);
 router.get('/edit-property/:id', ensureAdmin, propertyController.editPropertyForm);
 
 // Ruta para editar una propiedad
-router.put('/edit-property/:id', ensureAdmin, upload.array('img', 10), propertyController.editProperty);
+router.post('/edit-property/:id', ensureAdmin, upload.array('img', 30), propertyController.editProperty);
+
+// Middleware para listar rutas
+router.get('/routes', (req, res) => {
+    const routes = router.stack
+        .filter(r => r.route) // Filtra solo las rutas definidas
+        .map(r => ({
+            method: Object.keys(r.route.methods)[0].toUpperCase(),
+            path: r.route.path
+        }));
+    res.json(routes);
+});
+
 module.exports = router;
