@@ -69,6 +69,7 @@
                             <th>Piso</th>
                             <th>Año de Construcción</th>
                             <th>Descripción</th>
+                            <th>Link de Youtube</th>
                             <th>Imagen</th>
                             <th>Acciones</th>
                           </tr>
@@ -93,6 +94,7 @@
                             <th>Piso</th>
                             <th>Año</th>
                             <th>Descripción</th>
+                            <th>Link de Youtube</th>
                             <th>Imagen</th>
                             <th>Acciones</th>
                           </tr>
@@ -157,6 +159,9 @@
                                   <button type="button" class="btn btn-link" data-toggle="modal"
                                     data-target="#descriptionModal<%= property.id %>">Read more</button>
                               </td>
+                              <td>
+                                <%= property.youtubeLink %>
+                              </td> 
                               <td><img src="<%= property.img %>" alt="Property Image"
                                   style="width: 50px; height: auto;"></td>
                               <td>

@@ -78,6 +78,13 @@ const renderIndexPage = async (req, res) => {
   }
 };
 
+const convertToEmbedLink = (url) => {
+  if (url.includes('shorts')) {
+    return url.replace('youtube.com/shorts/', 'youtube.com/embed/').split('?')[0];
+  }
+  return url.replace('watch?v=', 'embed/').split('?')[0];
+};
+
 const getProperty = async (req, res) => {
   try {
     const property = await Property.findByPk(req.params.id, {
@@ -88,6 +95,12 @@ const getProperty = async (req, res) => {
       }]
     });
     const baseUrl = '/';
+
+    // Convierte el enlace de YouTube al formato embed
+    if (property.youtubeLink) {
+      property.youtubeLink = convertToEmbedLink(property.youtubeLink);
+    }
+
     if (property) {
       res.render('property-single', { property, baseUrl, googleMapsApiKey });
     } else {
@@ -246,7 +259,7 @@ const editPropertyForm = async (req, res) => {
 
 const formatDescription = (description) => {
   return description
-    .split('.')
+    .split(/(?<!\d)\./) // Divide solo en puntos que no estén precedidos por un número
     .map(sentence => sentence.trim() ? `<b>${sentence.trim()}.</b><br>` : '')
     .join(' ');
 };
@@ -255,7 +268,7 @@ const formatDescription = (description) => {
 const editProperty = async (req, res) => {
   try {
     const { id } = req.params;
-    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description, existingImages } = req.body;
+    const { transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description, youtubeLink, existingImages } = req.body;
 
     // Verifica si la propiedad existe
     const property = await Property.findByPk(id);
@@ -265,7 +278,7 @@ const editProperty = async (req, res) => {
 
     // Actualiza la propiedad
     await property.update({
-      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description: formatDescription(description)
+      transactionType, price, address, area, rooms, bathrooms, garage, department, city, neighborhood, status, ownerId, description: formatDescription(description), youtubeLink
     });
 
     // Maneja las imágenes existentes
@@ -308,6 +321,8 @@ const editProperty = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   getProperties,
   renderIndexPage,
@@ -318,4 +333,5 @@ module.exports = {
   filterProperties,
   listProperties,
   createPropertyForm,
+  convertToEmbedLink
 };

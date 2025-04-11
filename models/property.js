@@ -84,6 +84,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'Casa'
     },
+    youtubeLink: {
+      type: DataTypes.STRING,
+      allowNull: true, // Puede estar vacío
+      defaultValue: null // Valor por defecto
+    },
     property_condition: {
       type: DataTypes.ENUM,
       values: ['nuevo', 'usado', 'en construcción', 'remodelado'],
